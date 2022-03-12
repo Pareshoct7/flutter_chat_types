@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
+
 import '../message.dart';
 import '../preview_data.dart' show PreviewData;
 import '../user.dart' show User;
@@ -22,7 +23,7 @@ class UnsupportedMessage extends Message {
     String? remoteId,
     Message? repliedMessage,
     String? roomId,
-    Status? status,
+    // StatusType? status,
     MessageType? type,
     int? updatedAt,
   }) : super(
@@ -33,7 +34,7 @@ class UnsupportedMessage extends Message {
           remoteId,
           repliedMessage,
           roomId,
-          status,
+          // status,
           type ?? MessageType.unsupported,
           updatedAt,
         );
@@ -61,7 +62,7 @@ class UnsupportedMessage extends Message {
     Map<String, dynamic>? metadata,
     PreviewData? previewData,
     String? remoteId,
-    Status? status,
+    // StatusType? status,
     String? text,
     int? updatedAt,
     String? uri,
@@ -79,7 +80,7 @@ class UnsupportedMessage extends Message {
       remoteId: remoteId,
       repliedMessage: repliedMessage,
       roomId: roomId,
-      status: status ?? this.status,
+      // status: status ?? this.status,
       updatedAt: updatedAt,
     );
   }
@@ -94,7 +95,7 @@ class UnsupportedMessage extends Message {
         remoteId,
         repliedMessage,
         roomId,
-        status,
+        // status,
         updatedAt,
       ];
 }

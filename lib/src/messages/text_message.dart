@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
+
 import '../message.dart';
 import '../preview_data.dart' show PreviewData;
 import '../user.dart' show User;
@@ -21,7 +22,7 @@ class TextMessage extends Message {
     String? remoteId,
     Message? repliedMessage,
     String? roomId,
-    Status? status,
+    // StatusType? status,
     required this.text,
     MessageType? type,
     int? updatedAt,
@@ -33,7 +34,7 @@ class TextMessage extends Message {
           remoteId,
           repliedMessage,
           roomId,
-          status,
+          // status,
           type ?? MessageType.text,
           updatedAt,
         );
@@ -47,7 +48,7 @@ class TextMessage extends Message {
     String? remoteId,
     Message? repliedMessage,
     String? roomId,
-    Status? status,
+    // StatusType? status,
     int? updatedAt,
   })  : previewData = partialText.previewData,
         text = partialText.text,
@@ -59,7 +60,7 @@ class TextMessage extends Message {
           remoteId,
           repliedMessage,
           roomId,
-          status,
+          // status,
           MessageType.text,
           updatedAt,
         );
@@ -84,7 +85,7 @@ class TextMessage extends Message {
     Map<String, dynamic>? metadata,
     PreviewData? previewData,
     String? remoteId,
-    Status? status,
+    // StatusType? status,
     String? text,
     int? updatedAt,
     String? uri,
@@ -103,7 +104,7 @@ class TextMessage extends Message {
       remoteId: remoteId,
       repliedMessage: repliedMessage,
       roomId: roomId,
-      status: status ?? this.status,
+      // status: status ?? this.status,
       text: text ?? this.text,
       updatedAt: updatedAt,
     );
@@ -120,7 +121,7 @@ class TextMessage extends Message {
         remoteId,
         repliedMessage,
         roomId,
-        status,
+        // status,
         text,
         updatedAt,
       ];

@@ -11,9 +11,6 @@ import 'user.dart' show User;
 /// All possible message types.
 enum MessageType { custom, file, image, text, unsupported }
 
-/// All possible statuses message can have.
-enum Status { delivered, error, seen, sending, sent }
-
 /// An abstract class that contains all variables and methods
 /// every message will have.
 @immutable
@@ -26,7 +23,7 @@ abstract class Message extends Equatable {
     this.remoteId,
     this.repliedMessage,
     this.roomId,
-    this.status,
+    // this.status,
     this.type,
     this.updatedAt,
   );
@@ -65,7 +62,7 @@ abstract class Message extends Equatable {
     Map<String, dynamic>? metadata,
     PreviewData? previewData,
     String? remoteId,
-    Status? status,
+    // StatusType? status,
     String? text,
     int? updatedAt,
     String? uri,
@@ -95,8 +92,8 @@ abstract class Message extends Equatable {
   /// ID of the room where this message is sent
   final String? roomId;
 
-  /// Message [Status]
-  final Status? status;
+  /// Message [StatusType]
+  // final Status? status;
 
   /// [MessageType]
   final MessageType type;
