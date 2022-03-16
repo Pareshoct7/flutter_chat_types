@@ -15,7 +15,9 @@ class Status extends Equatable {
       this.status,
       this.createdAt,
       this.updatedAt,
-      this.allStatus,
+      this.sentAt,
+      this.deliveredAt,
+      this.seenAt,
       required this.id});
 
   factory Status.fromJson(Map<String, dynamic> json) => _$StatusFromJson(json);
@@ -23,14 +25,18 @@ class Status extends Equatable {
   Status copyWith({
     StatusType? status,
     int? updatedAt,
-    List<AllStatus>? allStatus,
+    int? sentAt,
+    int? deliveredAt,
+    int? seenAt,
   }) {
     return Status(
       id: this.id,
       userId: this.userId,
       status: status,
       updatedAt: updatedAt,
-      allStatus: allStatus ?? this.allStatus,
+      sentAt: sentAt,
+      deliveredAt: deliveredAt,
+      seenAt: seenAt,
     );
   }
 
@@ -49,8 +55,14 @@ class Status extends Equatable {
   /// Updated message timestamp, in ms
   final int? updatedAt;
 
-  /// All Status with type
-  final List<AllStatus>? allStatus;
+  /// Updated message timestamp, in ms
+  final int? sentAt;
+
+  /// Updated message timestamp, in ms
+  final int? deliveredAt;
+
+  /// Updated message timestamp, in ms
+  final int? seenAt;
 
   /// Unique ID of the message
   final String id;
@@ -58,37 +70,5 @@ class Status extends Equatable {
   /// Equatable props
   @override
   List<Object?> get props =>
-      [userId, status, createdAt, updatedAt, allStatus, id];
-}
-
-@JsonSerializable()
-@immutable
-class AllStatus extends Equatable {
-  const AllStatus({this.status, this.createdAt, this.updatedAt});
-
-  factory AllStatus.fromJson(Map<String, dynamic> json) =>
-      _$AllStatusFromJson(json);
-
-  AllStatus copyWith({
-    StatusType? status,
-    int? updatedAt,
-  }) {
-    return AllStatus(status: status, updatedAt: updatedAt);
-  }
-
-  /// Converts a particular message to the map representation, encodable to JSON.
-  Map<String, dynamic> toJson() => _$AllStatusToJson(this);
-
-  /// Message [StatusType]
-  final StatusType? status;
-
-  /// Created message timestamp, in ms
-  final int? createdAt;
-
-  /// Updated message timestamp, in ms
-  final int? updatedAt;
-
-  /// Equatable props
-  @override
-  List<Object?> get props => [status, createdAt, updatedAt];
+      [userId, status, createdAt, updatedAt, sentAt, deliveredAt, seenAt, id];
 }
