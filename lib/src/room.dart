@@ -10,22 +10,30 @@ part 'room.g.dart';
 /// All possible room types
 enum RoomType { channel, direct, group }
 
+/// All possible room types
+enum RoomStatus { pending, accept, reject, block }
+
 /// A class that represents a room where 2 or more participants can chat
 @JsonSerializable()
 @immutable
 class Room extends Equatable {
   /// Creates a [Room]
-  const Room({
-    this.createdAt,
-    required this.id,
-    this.imageUrl,
-    this.lastMessages,
-    this.metadata,
-    this.name,
-    required this.type,
-    this.updatedAt,
-    required this.users,
-  });
+  const Room(
+      {this.createdAt,
+      required this.id,
+      this.imageUrl,
+      this.lastMessages,
+      this.metadata,
+      this.name,
+      required this.type,
+      this.updatedAt,
+      required this.users,
+      required this.requestedBy,
+      this.requestedAt,
+      this.requestModifiedAt,
+      this.status,
+      this.roomStatusChangedBy,
+      this.roomStatusChangedAt});
 
   /// Creates room from a map (decoded JSON).
   factory Room.fromJson(Map<String, dynamic> json) => _$RoomFromJson(json);
@@ -49,6 +57,7 @@ class Room extends Equatable {
   }) {
     return Room(
       id: id,
+      requestedBy: requestedBy,
       imageUrl: imageUrl,
       lastMessages: lastMessages,
       metadata: metadata == null
@@ -75,7 +84,13 @@ class Room extends Equatable {
         name,
         type,
         updatedAt,
-        users
+        users,
+        requestedBy,
+        requestedAt,
+        requestModifiedAt,
+        status,
+        roomStatusChangedBy,
+        roomStatusChangedAt
       ];
 
   /// Created room timestamp, in ms
@@ -106,4 +121,22 @@ class Room extends Equatable {
 
   /// List of users which are in the room
   final List<User> users;
+
+  /// User's id who requested to start conversation
+  final String requestedBy;
+
+  /// chat request timestamp, in ms
+  final int? requestedAt;
+
+  /// when roomStatus changes timestamp, in ms
+  final int? requestModifiedAt;
+
+  /// [RoomStatus]
+  final RoomStatus? status;
+
+  /// User's id who changed last status
+  final String? roomStatusChangedBy;
+
+  /// when roomStatus changes timestamp, in ms
+  final int? roomStatusChangedAt;
 }
