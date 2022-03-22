@@ -67,4 +67,5 @@ const _$RoomStatusEnumMap = {
   RoomStatus.accept: 'accept',
   RoomStatus.reject: 'reject',
   RoomStatus.block: 'block',
+  RoomStatus.cancel: 'cancel',
 };

@@ -11,7 +11,7 @@ part 'room.g.dart';
 enum RoomType { channel, direct, group }
 
 /// All possible room types
-enum RoomStatus { pending, accept, reject, block }
+enum RoomStatus { pending, accept, reject, block, cancel }
 
 /// A class that represents a room where 2 or more participants can chat
 @JsonSerializable()
