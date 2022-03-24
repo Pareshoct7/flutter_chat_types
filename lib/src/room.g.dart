@@ -26,6 +26,9 @@ Room _$RoomFromJson(Map<String, dynamic> json) => Room(
       status: $enumDecodeNullable(_$RoomStatusEnumMap, json['status']),
       roomStatusChangedBy: json['roomStatusChangedBy'] as String?,
       roomStatusChangedAt: json['roomStatusChangedAt'] as int?,
+      blocks: (json['blocks'] as List<dynamic>?)
+          ?.map((e) => Block.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$RoomToJson(Room instance) {
@@ -53,6 +56,7 @@ Map<String, dynamic> _$RoomToJson(Room instance) {
   writeNotNull('status', _$RoomStatusEnumMap[instance.status]);
   writeNotNull('roomStatusChangedBy', instance.roomStatusChangedBy);
   writeNotNull('roomStatusChangedAt', instance.roomStatusChangedAt);
+  writeNotNull('blocks', instance.blocks?.map((e) => e.toJson()).toList());
   return val;
 }
 
@@ -69,3 +73,13 @@ const _$RoomStatusEnumMap = {
   RoomStatus.block: 'block',
   RoomStatus.cancel: 'cancel',
 };
+
+Block _$BlockFromJson(Map<String, dynamic> json) => Block(
+      blockedBy: json['blockedBy'] as String,
+      blockedTo: json['blockedTo'] as String,
+    );
+
+Map<String, dynamic> _$BlockToJson(Block instance) => <String, dynamic>{
+      'blockedBy': instance.blockedBy,
+      'blockedTo': instance.blockedTo,
+    };

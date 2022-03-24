@@ -33,7 +33,8 @@ class Room extends Equatable {
       this.requestModifiedAt,
       this.status,
       this.roomStatusChangedBy,
-      this.roomStatusChangedAt});
+      this.roomStatusChangedAt,
+      this.blocks});
 
   /// Creates room from a map (decoded JSON).
   factory Room.fromJson(Map<String, dynamic> json) => _$RoomFromJson(json);
@@ -54,6 +55,7 @@ class Room extends Equatable {
     RoomType? type,
     int? updatedAt,
     List<User>? users,
+    List<Block>? blocks,
   }) {
     return Room(
       id: id,
@@ -70,6 +72,7 @@ class Room extends Equatable {
       type: type ?? this.type,
       updatedAt: updatedAt,
       users: users ?? this.users,
+      blocks: blocks ?? this.blocks,
     );
   }
 
@@ -90,7 +93,8 @@ class Room extends Equatable {
         requestModifiedAt,
         status,
         roomStatusChangedBy,
-        roomStatusChangedAt
+        roomStatusChangedAt,
+        blocks
       ];
 
   /// Created room timestamp, in ms
@@ -139,4 +143,28 @@ class Room extends Equatable {
 
   /// when roomStatus changes timestamp, in ms
   final int? roomStatusChangedAt;
+
+  /// List of users which are blocked by someone
+  final List<Block>? blocks;
+}
+
+@JsonSerializable()
+@immutable
+class Block extends Equatable {
+  const Block({required this.blockedBy, required this.blockedTo});
+
+  factory Block.fromJson(Map<String, dynamic> json) => _$BlockFromJson(json);
+
+  /// Converts a particular message to the map representation, encodable to JSON.
+  Map<String, dynamic> toJson() => _$BlockToJson(this);
+
+  /// User who blocked
+  final String blockedBy;
+
+  // blocked user
+  final String blockedTo;
+
+  /// Equatable props
+  @override
+  List<Object?> get props => [blockedBy, blockedTo];
 }
