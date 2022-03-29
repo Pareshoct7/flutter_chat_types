@@ -22,6 +22,9 @@ FileMessage _$FileMessageFromJson(Map<String, dynamic> json) => FileMessage(
       type: $enumDecodeNullable(_$MessageTypeEnumMap, json['type']),
       updatedAt: json['updatedAt'] as int?,
       uri: json['uri'] as String,
+      deleteType:
+          $enumDecodeNullable(_$MessageDeleteTypeEnumMap, json['deleteType']),
+      deletedAt: json['deletedAt'] as int?,
     );
 
 Map<String, dynamic> _$FileMessageToJson(FileMessage instance) {
@@ -43,6 +46,8 @@ Map<String, dynamic> _$FileMessageToJson(FileMessage instance) {
   writeNotNull('roomId', instance.roomId);
   val['type'] = _$MessageTypeEnumMap[instance.type];
   writeNotNull('updatedAt', instance.updatedAt);
+  writeNotNull('deleteType', _$MessageDeleteTypeEnumMap[instance.deleteType]);
+  writeNotNull('deletedAt', instance.deletedAt);
   writeNotNull('mimeType', instance.mimeType);
   val['name'] = instance.name;
   val['size'] = instance.size;
@@ -56,4 +61,10 @@ const _$MessageTypeEnumMap = {
   MessageType.image: 'image',
   MessageType.text: 'text',
   MessageType.unsupported: 'unsupported',
+};
+
+const _$MessageDeleteTypeEnumMap = {
+  MessageDeleteType.none: 'none',
+  MessageDeleteType.me: 'me',
+  MessageDeleteType.everyone: 'everyone',
 };

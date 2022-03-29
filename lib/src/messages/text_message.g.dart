@@ -22,6 +22,9 @@ TextMessage _$TextMessageFromJson(Map<String, dynamic> json) => TextMessage(
       text: json['text'] as String,
       type: $enumDecodeNullable(_$MessageTypeEnumMap, json['type']),
       updatedAt: json['updatedAt'] as int?,
+      deleteType:
+          $enumDecodeNullable(_$MessageDeleteTypeEnumMap, json['deleteType']),
+      deletedAt: json['deletedAt'] as int?,
     );
 
 Map<String, dynamic> _$TextMessageToJson(TextMessage instance) {
@@ -43,6 +46,8 @@ Map<String, dynamic> _$TextMessageToJson(TextMessage instance) {
   writeNotNull('roomId', instance.roomId);
   val['type'] = _$MessageTypeEnumMap[instance.type];
   writeNotNull('updatedAt', instance.updatedAt);
+  writeNotNull('deleteType', _$MessageDeleteTypeEnumMap[instance.deleteType]);
+  writeNotNull('deletedAt', instance.deletedAt);
   writeNotNull('previewData', instance.previewData?.toJson());
   val['text'] = instance.text;
   return val;
@@ -54,4 +59,10 @@ const _$MessageTypeEnumMap = {
   MessageType.image: 'image',
   MessageType.text: 'text',
   MessageType.unsupported: 'unsupported',
+};
+
+const _$MessageDeleteTypeEnumMap = {
+  MessageDeleteType.none: 'none',
+  MessageDeleteType.me: 'me',
+  MessageDeleteType.everyone: 'everyone',
 };

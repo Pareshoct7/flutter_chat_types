@@ -19,6 +19,9 @@ UnsupportedMessage _$UnsupportedMessageFromJson(Map<String, dynamic> json) =>
       roomId: json['roomId'] as String?,
       type: $enumDecodeNullable(_$MessageTypeEnumMap, json['type']),
       updatedAt: json['updatedAt'] as int?,
+      deleteType:
+          $enumDecodeNullable(_$MessageDeleteTypeEnumMap, json['deleteType']),
+      deletedAt: json['deletedAt'] as int?,
     );
 
 Map<String, dynamic> _$UnsupportedMessageToJson(UnsupportedMessage instance) {
@@ -40,6 +43,8 @@ Map<String, dynamic> _$UnsupportedMessageToJson(UnsupportedMessage instance) {
   writeNotNull('roomId', instance.roomId);
   val['type'] = _$MessageTypeEnumMap[instance.type];
   writeNotNull('updatedAt', instance.updatedAt);
+  writeNotNull('deleteType', _$MessageDeleteTypeEnumMap[instance.deleteType]);
+  writeNotNull('deletedAt', instance.deletedAt);
   return val;
 }
 
@@ -49,4 +54,10 @@ const _$MessageTypeEnumMap = {
   MessageType.image: 'image',
   MessageType.text: 'text',
   MessageType.unsupported: 'unsupported',
+};
+
+const _$MessageDeleteTypeEnumMap = {
+  MessageDeleteType.none: 'none',
+  MessageDeleteType.me: 'me',
+  MessageDeleteType.everyone: 'everyone',
 };

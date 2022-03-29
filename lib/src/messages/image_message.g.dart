@@ -23,6 +23,9 @@ ImageMessage _$ImageMessageFromJson(Map<String, dynamic> json) => ImageMessage(
       updatedAt: json['updatedAt'] as int?,
       uri: json['uri'] as String,
       width: (json['width'] as num?)?.toDouble(),
+      deleteType:
+          $enumDecodeNullable(_$MessageDeleteTypeEnumMap, json['deleteType']),
+      deletedAt: json['deletedAt'] as int?,
     );
 
 Map<String, dynamic> _$ImageMessageToJson(ImageMessage instance) {
@@ -44,6 +47,8 @@ Map<String, dynamic> _$ImageMessageToJson(ImageMessage instance) {
   writeNotNull('roomId', instance.roomId);
   val['type'] = _$MessageTypeEnumMap[instance.type];
   writeNotNull('updatedAt', instance.updatedAt);
+  writeNotNull('deleteType', _$MessageDeleteTypeEnumMap[instance.deleteType]);
+  writeNotNull('deletedAt', instance.deletedAt);
   writeNotNull('height', instance.height);
   val['name'] = instance.name;
   val['size'] = instance.size;
@@ -58,4 +63,10 @@ const _$MessageTypeEnumMap = {
   MessageType.image: 'image',
   MessageType.text: 'text',
   MessageType.unsupported: 'unsupported',
+};
+
+const _$MessageDeleteTypeEnumMap = {
+  MessageDeleteType.none: 'none',
+  MessageDeleteType.me: 'me',
+  MessageDeleteType.everyone: 'everyone',
 };
