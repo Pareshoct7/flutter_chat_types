@@ -129,6 +129,12 @@ class FileMessage extends Message {
     );
   }
 
+  @override
+  Message clone({required User author}) {
+    // TODO: implement clone
+    throw FileMessage(author: author, id: id, size: size, name: name, uri: uri, );
+  }
+
   /// Equatable props
   @override
   List<Object?> get props => [

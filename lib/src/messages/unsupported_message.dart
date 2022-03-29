@@ -93,6 +93,12 @@ class UnsupportedMessage extends Message {
     );
   }
 
+  @override
+  Message clone({required User author}) {
+    // TODO: implement clone
+    throw UnsupportedMessage(author: author, id: id);
+  }
+
   /// Equatable props
   @override
   List<Object?> get props => [
