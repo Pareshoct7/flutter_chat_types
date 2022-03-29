@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
+
 import '../message.dart';
 import '../preview_data.dart' show PreviewData;
 import '../user.dart' show User;
@@ -27,6 +28,8 @@ class FileMessage extends Message {
     MessageType? type,
     int? updatedAt,
     required this.uri,
+    MessageDeleteType? deleteType,
+    int? deletedAt,
   }) : super(
           author,
           createdAt,
@@ -38,6 +41,8 @@ class FileMessage extends Message {
           // status,
           type ?? MessageType.file,
           updatedAt,
+          deleteType ?? MessageDeleteType.none,
+          deletedAt,
         );
 
   /// Creates a full file message from a partial one.
@@ -51,6 +56,8 @@ class FileMessage extends Message {
     String? roomId,
     // StatusType? status,
     int? updatedAt,
+    MessageDeleteType? deleteType,
+    int? deletedAt,
   })  : mimeType = partialFile.mimeType,
         name = partialFile.name,
         size = partialFile.size,
@@ -66,6 +73,8 @@ class FileMessage extends Message {
           // status,
           MessageType.file,
           updatedAt,
+          deleteType ?? MessageDeleteType.none,
+          deletedAt,
         );
 
   /// Creates a file message from a map (decoded JSON).
@@ -93,6 +102,8 @@ class FileMessage extends Message {
     String? text,
     int? updatedAt,
     String? uri,
+    MessageDeleteType? deleteType,
+    int? deletedAt,
   }) {
     return FileMessage(
       author: author,
@@ -113,6 +124,8 @@ class FileMessage extends Message {
       // status: status ?? this.status,
       updatedAt: updatedAt,
       uri: uri ?? this.uri,
+      deleteType: deleteType,
+      deletedAt: deletedAt,
     );
   }
 
@@ -132,6 +145,8 @@ class FileMessage extends Message {
         // status,
         updatedAt,
         uri,
+        deleteType,
+        deletedAt,
       ];
 
   /// Media type

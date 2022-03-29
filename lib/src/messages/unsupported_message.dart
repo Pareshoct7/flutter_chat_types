@@ -26,6 +26,8 @@ class UnsupportedMessage extends Message {
     // StatusType? status,
     MessageType? type,
     int? updatedAt,
+    MessageDeleteType? deleteType,
+    int? deletedAt,
   }) : super(
           author,
           createdAt,
@@ -37,6 +39,8 @@ class UnsupportedMessage extends Message {
           // status,
           type ?? MessageType.unsupported,
           updatedAt,
+          deleteType ?? MessageDeleteType.none,
+          deletedAt,
         );
 
   /// Creates an unsupported message from a map (decoded JSON).
@@ -66,6 +70,8 @@ class UnsupportedMessage extends Message {
     String? text,
     int? updatedAt,
     String? uri,
+    MessageDeleteType? deleteType,
+    int? deletedAt,
   }) {
     return UnsupportedMessage(
       author: author,
@@ -82,6 +88,8 @@ class UnsupportedMessage extends Message {
       roomId: roomId,
       // status: status ?? this.status,
       updatedAt: updatedAt,
+      deleteType: deleteType,
+      deletedAt: deletedAt,
     );
   }
 
@@ -97,5 +105,7 @@ class UnsupportedMessage extends Message {
         roomId,
         // status,
         updatedAt,
+        deleteType,
+        deletedAt,
       ];
 }

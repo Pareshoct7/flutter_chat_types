@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
+
 import '../message.dart';
 import '../preview_data.dart' show PreviewData;
 import '../user.dart' show User;
@@ -28,6 +29,8 @@ class ImageMessage extends Message {
     int? updatedAt,
     required this.uri,
     this.width,
+    MessageDeleteType? deleteType,
+    int? deletedAt,
   }) : super(
           author,
           createdAt,
@@ -39,6 +42,8 @@ class ImageMessage extends Message {
           // status,
           type ?? MessageType.image,
           updatedAt,
+          deleteType ?? MessageDeleteType.none,
+          deletedAt,
         );
 
   /// Creates a full image message from a partial one.
@@ -52,6 +57,8 @@ class ImageMessage extends Message {
     String? roomId,
     // StatusType? status,
     int? updatedAt,
+    MessageDeleteType? deleteType,
+    int? deletedAt,
   })  : height = partialImage.height,
         name = partialImage.name,
         size = partialImage.size,
@@ -68,6 +75,8 @@ class ImageMessage extends Message {
           // status,
           MessageType.image,
           updatedAt,
+          deleteType ?? MessageDeleteType.none,
+          deletedAt,
         );
 
   /// Creates an image message from a map (decoded JSON).
@@ -95,6 +104,8 @@ class ImageMessage extends Message {
     String? text,
     int? updatedAt,
     String? uri,
+    MessageDeleteType? deleteType,
+    int? deletedAt,
   }) {
     return ImageMessage(
       author: author,
@@ -116,6 +127,8 @@ class ImageMessage extends Message {
       updatedAt: updatedAt,
       uri: uri ?? this.uri,
       width: width,
+      deleteType: deleteType,
+      deletedAt: deletedAt,
     );
   }
 
@@ -136,6 +149,8 @@ class ImageMessage extends Message {
         updatedAt,
         uri,
         width,
+        deleteType,
+        deletedAt,
       ];
 
   /// Image height in pixels

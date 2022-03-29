@@ -26,6 +26,8 @@ class TextMessage extends Message {
     required this.text,
     MessageType? type,
     int? updatedAt,
+    MessageDeleteType? deleteType,
+    int? deletedAt,
   }) : super(
           author,
           createdAt,
@@ -37,6 +39,8 @@ class TextMessage extends Message {
           // status,
           type ?? MessageType.text,
           updatedAt,
+          deleteType ?? MessageDeleteType.none,
+          deletedAt,
         );
 
   /// Creates a full text message from a partial one.
@@ -50,6 +54,8 @@ class TextMessage extends Message {
     String? roomId,
     // StatusType? status,
     int? updatedAt,
+    MessageDeleteType? deleteType,
+    int? deletedAt,
   })  : previewData = partialText.previewData,
         text = partialText.text,
         super(
@@ -63,6 +69,8 @@ class TextMessage extends Message {
           // status,
           MessageType.text,
           updatedAt,
+          deleteType ?? MessageDeleteType.none,
+          deletedAt,
         );
 
   /// Creates a text message from a map (decoded JSON).
@@ -89,6 +97,8 @@ class TextMessage extends Message {
     String? text,
     int? updatedAt,
     String? uri,
+    MessageDeleteType? deleteType,
+    int? deletedAt,
   }) {
     return TextMessage(
       author: author,
@@ -107,6 +117,8 @@ class TextMessage extends Message {
       // status: status ?? this.status,
       text: text ?? this.text,
       updatedAt: updatedAt,
+      deleteType: deleteType,
+      deletedAt: deletedAt,
     );
   }
 
@@ -124,6 +136,8 @@ class TextMessage extends Message {
         // status,
         text,
         updatedAt,
+        deleteType,
+        deletedAt,
       ];
 
   /// See [PreviewData]

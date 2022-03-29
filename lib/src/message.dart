@@ -11,6 +11,9 @@ import 'user.dart' show User;
 /// All possible message types.
 enum MessageType { custom, file, image, text, unsupported }
 
+/// All possible message delete types.
+enum MessageDeleteType { none, me, everyone}
+
 /// An abstract class that contains all variables and methods
 /// every message will have.
 @immutable
@@ -26,6 +29,8 @@ abstract class Message extends Equatable {
     // this.status,
     this.type,
     this.updatedAt,
+    this.deleteType,
+    this.deletedAt
   );
 
   /// Creates a particular message from a map (decoded JSON).
@@ -66,6 +71,7 @@ abstract class Message extends Equatable {
     String? text,
     int? updatedAt,
     String? uri,
+    MessageDeleteType? deleteType,
   });
 
   /// Converts a particular message to the map representation, encodable to JSON.
@@ -100,4 +106,10 @@ abstract class Message extends Equatable {
 
   /// Updated message timestamp, in ms
   final int? updatedAt;
+
+  /// it indicates message is deleted or not
+  final MessageDeleteType? deleteType;
+
+  /// deleted message timestamp, in ms
+  final int? deletedAt;
 }
