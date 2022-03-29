@@ -74,11 +74,6 @@ abstract class Message extends Equatable {
     MessageDeleteType? deleteType,
   });
 
-
-  Message clone({
-    required User author,
-  });
-
   /// Converts a particular message to the map representation, encodable to JSON.
   Map<String, dynamic> toJson();
 

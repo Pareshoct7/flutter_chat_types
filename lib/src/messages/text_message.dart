@@ -122,12 +122,6 @@ class TextMessage extends Message {
     );
   }
 
-  @override
-  Message clone({required User author}) {
-    // TODO: implement clone
-    throw TextMessage(author: author, id: id, text: text);
-  }
-
   /// Equatable props
   @override
   List<Object?> get props => [

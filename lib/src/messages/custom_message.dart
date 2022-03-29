@@ -135,10 +135,4 @@ class CustomMessage extends Message {
         deleteType,
         deletedAt,
       ];
-
-  @override
-  Message clone({required User author}) {
-    // TODO: implement clone
-    throw CustomMessage(author: author, id: id);
-  }
 }
