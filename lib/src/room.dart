@@ -22,7 +22,7 @@ class Room extends Equatable {
       {this.createdAt,
       required this.id,
       this.imageUrl,
-      this.lastMessages,
+      this.lastMessage,
       this.metadata,
       this.name,
       required this.type,
@@ -34,7 +34,8 @@ class Room extends Equatable {
       this.status,
       this.roomStatusChangedBy,
       this.roomStatusChangedAt,
-      this.blocks});
+      this.blocks,
+      this.unRead});
 
   /// Creates room from a map (decoded JSON).
   factory Room.fromJson(Map<String, dynamic> json) => _$RoomFromJson(json);
@@ -56,12 +57,13 @@ class Room extends Equatable {
     int? updatedAt,
     List<User>? users,
     List<Block>? blocks,
+    Map<String, dynamic>? unRead,
   }) {
     return Room(
       id: id,
       requestedBy: requestedBy,
       imageUrl: imageUrl,
-      lastMessages: lastMessages,
+      lastMessage: lastMessage,
       metadata: metadata == null
           ? null
           : {
@@ -73,6 +75,12 @@ class Room extends Equatable {
       updatedAt: updatedAt,
       users: users ?? this.users,
       blocks: blocks ?? this.blocks,
+      unRead: unRead == null
+          ? null
+          : {
+              ...this.unRead ?? {},
+              ...unRead,
+            },
     );
   }
 
@@ -82,7 +90,7 @@ class Room extends Equatable {
         createdAt,
         id,
         imageUrl,
-        lastMessages,
+        lastMessage,
         metadata,
         name,
         type,
@@ -94,7 +102,8 @@ class Room extends Equatable {
         status,
         roomStatusChangedBy,
         roomStatusChangedAt,
-        blocks
+        blocks,
+        unRead
       ];
 
   /// Created room timestamp, in ms
@@ -108,7 +117,7 @@ class Room extends Equatable {
   final String? imageUrl;
 
   /// List of last messages this room has received
-  final List<Message>? lastMessages;
+  final Message? lastMessage;
 
   /// Additional custom metadata or attributes related to the room
   final Map<String, dynamic>? metadata;
@@ -146,6 +155,9 @@ class Room extends Equatable {
 
   /// List of users which are blocked by someone
   final List<Block>? blocks;
+
+  /// it gives the count of unread messages
+  final Map<String, dynamic>? unRead;
 }
 
 @JsonSerializable()

@@ -22,6 +22,8 @@ class User extends Equatable {
     this.metadata,
     this.role,
     this.updatedAt,
+    this.token,
+    this.online
   });
 
   /// Creates user from a map (decoded JSON).
@@ -44,6 +46,8 @@ class User extends Equatable {
     Map<String, dynamic>? metadata,
     Role? role,
     int? updatedAt,
+    String? token,
+    int? online,
   }) {
     return User(
       firstName: firstName,
@@ -59,6 +63,8 @@ class User extends Equatable {
             },
       role: role,
       updatedAt: updatedAt,
+      token: token,
+      online: online,
     );
   }
 
@@ -73,7 +79,9 @@ class User extends Equatable {
         lastSeen,
         metadata,
         role,
-        updatedAt
+        updatedAt,
+        token,
+        online
       ];
 
   /// Created user timestamp, in ms
@@ -102,4 +110,10 @@ class User extends Equatable {
 
   /// Updated user timestamp, in ms
   final int? updatedAt;
+
+  /// Fcm token to send push notifications
+  final String? token;
+
+  /// online flag indicated whether the user is online or offline
+  final int? online;
 }
