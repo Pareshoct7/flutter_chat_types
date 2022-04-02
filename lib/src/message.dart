@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_chat_types/src/status.dart';
 import 'package:meta/meta.dart';
 import 'messages/custom_message.dart';
 import 'messages/file_message.dart';
@@ -26,7 +27,7 @@ abstract class Message extends Equatable {
     this.remoteId,
     this.repliedMessage,
     this.roomId,
-    // this.status,
+    this.status,
     this.type,
     this.updatedAt,
     this.deleteType,
@@ -67,7 +68,7 @@ abstract class Message extends Equatable {
     Map<String, dynamic>? metadata,
     PreviewData? previewData,
     String? remoteId,
-    // StatusType? status,
+    StatusType? status,
     String? text,
     int? updatedAt,
     String? uri,
@@ -99,7 +100,7 @@ abstract class Message extends Equatable {
   final String? roomId;
 
   /// Message [StatusType]
-  // final Status? status;
+  final StatusType? status;
 
   /// [MessageType]
   final MessageType type;
