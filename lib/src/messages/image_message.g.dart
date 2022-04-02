@@ -19,6 +19,7 @@ ImageMessage _$ImageMessageFromJson(Map<String, dynamic> json) => ImageMessage(
           : Message.fromJson(json['repliedMessage'] as Map<String, dynamic>),
       roomId: json['roomId'] as String?,
       size: json['size'] as num,
+      status: $enumDecodeNullable(_$StatusTypeEnumMap, json['status']),
       type: $enumDecodeNullable(_$MessageTypeEnumMap, json['type']),
       updatedAt: json['updatedAt'] as int?,
       uri: json['uri'] as String,
@@ -45,6 +46,7 @@ Map<String, dynamic> _$ImageMessageToJson(ImageMessage instance) {
   writeNotNull('remoteId', instance.remoteId);
   writeNotNull('repliedMessage', instance.repliedMessage?.toJson());
   writeNotNull('roomId', instance.roomId);
+  writeNotNull('status', _$StatusTypeEnumMap[instance.status]);
   val['type'] = _$MessageTypeEnumMap[instance.type];
   writeNotNull('updatedAt', instance.updatedAt);
   writeNotNull('deleteType', _$MessageDeleteTypeEnumMap[instance.deleteType]);
@@ -56,6 +58,14 @@ Map<String, dynamic> _$ImageMessageToJson(ImageMessage instance) {
   writeNotNull('width', instance.width);
   return val;
 }
+
+const _$StatusTypeEnumMap = {
+  StatusType.delivered: 'delivered',
+  StatusType.error: 'error',
+  StatusType.seen: 'seen',
+  StatusType.sending: 'sending',
+  StatusType.sent: 'sent',
+};
 
 const _$MessageTypeEnumMap = {
   MessageType.custom: 'custom',
