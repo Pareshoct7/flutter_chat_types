@@ -12,19 +12,23 @@ enum Role { admin, agent, moderator, user }
 @immutable
 class User extends Equatable {
   /// Creates a user.
-  const User({
-    this.createdAt,
-    this.firstName,
-    required this.id,
-    this.imageUrl,
-    this.lastName,
-    this.lastSeen,
-    this.metadata,
-    this.role,
-    this.updatedAt,
-    this.token,
-    this.online
-  });
+  const User(
+      {this.createdAt,
+      this.firstName,
+      required this.id,
+      this.avatar,
+      this.lastName,
+      this.lastSeen,
+      this.metadata,
+      this.role,
+      this.updatedAt,
+      this.token,
+      this.online,
+      this.gender,
+      this.userId,
+      this.isVerified,
+      this.level,
+      this.uuid});
 
   /// Creates user from a map (decoded JSON).
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -48,11 +52,16 @@ class User extends Equatable {
     int? updatedAt,
     String? token,
     int? online,
+    int? gender,
+    int? userId,
+    int? isVerified,
+    int? level,
+    String? uuid,
   }) {
     return User(
       firstName: firstName,
       id: id,
-      imageUrl: imageUrl,
+      avatar: imageUrl,
       lastName: lastName,
       lastSeen: lastSeen,
       metadata: metadata == null
@@ -65,6 +74,11 @@ class User extends Equatable {
       updatedAt: updatedAt,
       token: token,
       online: online,
+      gender: gender,
+      userId: userId,
+      isVerified: isVerified,
+      level: level,
+      uuid: uuid,
     );
   }
 
@@ -74,14 +88,19 @@ class User extends Equatable {
         createdAt,
         firstName,
         id,
-        imageUrl,
+        avatar,
         lastName,
         lastSeen,
         metadata,
         role,
         updatedAt,
         token,
-        online
+        online,
+        gender,
+        userId,
+        isVerified,
+        level,
+        uuid
       ];
 
   /// Created user timestamp, in ms
@@ -94,7 +113,7 @@ class User extends Equatable {
   final String id;
 
   /// Remote image URL representing user's avatar
-  final String? imageUrl;
+  final String? avatar;
 
   /// Last name of the user
   final String? lastName;
@@ -116,4 +135,19 @@ class User extends Equatable {
 
   /// online flag indicated whether the user is online or offline
   final int? online;
+
+  /// Gender 1 means male
+  final int? gender;
+
+  /// knackit user id
+  final int? userId;
+
+  /// knackit user is verified or not
+  final int? isVerified;
+
+  /// knackit user's level
+  final int? level;
+
+  /// knackit user's level
+  final String? uuid;
 }

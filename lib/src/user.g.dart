@@ -10,7 +10,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       createdAt: json['createdAt'] as int?,
       firstName: json['firstName'] as String?,
       id: json['id'] as String,
-      imageUrl: json['imageUrl'] as String?,
+      avatar: json['avatar'] as String?,
       lastName: json['lastName'] as String?,
       lastSeen: json['lastSeen'] as int?,
       metadata: json['metadata'] as Map<String, dynamic>?,
@@ -18,6 +18,11 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       updatedAt: json['updatedAt'] as int?,
       token: json['token'] as String?,
       online: json['online'] as int?,
+      gender: json['gender'] as int?,
+      userId: json['userId'] as int?,
+      isVerified: json['isVerified'] as int?,
+      level: json['level'] as int?,
+      uuid: json['uuid'] as String?,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) {
@@ -32,7 +37,7 @@ Map<String, dynamic> _$UserToJson(User instance) {
   writeNotNull('createdAt', instance.createdAt);
   writeNotNull('firstName', instance.firstName);
   val['id'] = instance.id;
-  writeNotNull('imageUrl', instance.imageUrl);
+  writeNotNull('avatar', instance.avatar);
   writeNotNull('lastName', instance.lastName);
   writeNotNull('lastSeen', instance.lastSeen);
   writeNotNull('metadata', instance.metadata);
@@ -40,6 +45,11 @@ Map<String, dynamic> _$UserToJson(User instance) {
   writeNotNull('updatedAt', instance.updatedAt);
   writeNotNull('token', instance.token);
   writeNotNull('online', instance.online);
+  writeNotNull('gender', instance.gender);
+  writeNotNull('userId', instance.userId);
+  writeNotNull('isVerified', instance.isVerified);
+  writeNotNull('level', instance.level);
+  writeNotNull('uuid', instance.uuid);
   return val;
 }
 
