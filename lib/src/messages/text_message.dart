@@ -23,7 +23,11 @@ class TextMessage extends Message {
     String? remoteId,
     Message? repliedMessage,
     String? roomId,
+
     StatusType? status,
+
+    bool? showStatus,
+    
     required this.text,
     MessageType? type,
     int? updatedAt,
@@ -37,6 +41,7 @@ class TextMessage extends Message {
           remoteId,
           repliedMessage,
           roomId,
+          showStatus,
           status,
           type ?? MessageType.text,
           updatedAt,
@@ -53,7 +58,11 @@ class TextMessage extends Message {
     String? remoteId,
     Message? repliedMessage,
     String? roomId,
+
     StatusType? status,
+
+    bool? showStatus,
+    
     int? updatedAt,
     MessageDeleteType? deleteType,
     int? deletedAt,
@@ -67,6 +76,7 @@ class TextMessage extends Message {
           remoteId,
           repliedMessage,
           roomId,
+          showStatus,
           status,
           MessageType.text,
           updatedAt,
@@ -86,15 +96,22 @@ class TextMessage extends Message {
   /// [metadata] with null value will nullify existing metadata, otherwise
   /// both metadatas will be merged into one Map, where keys from a passed
   /// metadata will overwite keys from the previous one.
-  /// [remoteId] and [updatedAt] with null values will nullify existing value.
-  /// [status] and [text] with null values will be overwritten by previous values.
-  /// [uri] is ignored for this message type.
+  /// [previewData], [remoteId], [showStatus] and [updatedAt] with null values will nullify existing value.
+  /// [author], [createdAt], [status] and [text] with null values will be overwritten by previous values.
+  /// [isLoading], [uri] is ignored for this message type.
   @override
   Message copyWith({
+    User? author,
+    int? createdAt,
+    bool? isLoading,
     Map<String, dynamic>? metadata,
     PreviewData? previewData,
     String? remoteId,
+
     StatusType? status,
+
+    bool? showStatus,
+    
     String? text,
     int? updatedAt,
     String? uri,
@@ -102,8 +119,8 @@ class TextMessage extends Message {
     int? deletedAt,
   }) {
     return TextMessage(
-      author: author,
-      createdAt: createdAt,
+      author: author ?? this.author,
+      createdAt: createdAt ?? this.createdAt,
       id: id,
       metadata: metadata == null
           ? null
@@ -115,6 +132,7 @@ class TextMessage extends Message {
       remoteId: remoteId,
       repliedMessage: repliedMessage,
       roomId: roomId,
+      showStatus: showStatus,
       status: status ?? this.status,
       text: text ?? this.text,
       updatedAt: updatedAt,

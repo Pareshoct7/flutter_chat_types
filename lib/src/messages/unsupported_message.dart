@@ -24,7 +24,11 @@ class UnsupportedMessage extends Message {
     String? remoteId,
     Message? repliedMessage,
     String? roomId,
+
     StatusType? status,
+
+    bool? showStatus,
+    
     MessageType? type,
     int? updatedAt,
     MessageDeleteType? deleteType,
@@ -37,6 +41,7 @@ class UnsupportedMessage extends Message {
           remoteId,
           repliedMessage,
           roomId,
+          showStatus,
           status,
           type ?? MessageType.unsupported,
           updatedAt,
@@ -57,17 +62,24 @@ class UnsupportedMessage extends Message {
   /// [metadata] with null value will nullify existing metadata, otherwise
   /// both metadatas will be merged into one Map, where keys from a passed
   /// metadata will overwite keys from the previous one.
-  /// [previewData] is ignored for this message type.
-  /// [remoteId] and [updatedAt] with null values will nullify existing value.
-  /// [status] with null value will be overwritten by the previous status.
+  /// [isLoading], [previewData] is ignored for this message type.
+  /// [remoteId], [showStatus] and [updatedAt] with null values will nullify existing value.
+  /// [author], [createdAt], [status] with null values will be overwritten by the previous values.
   /// [text] is ignored for this message type.
   /// [uri] is ignored for this message type.
   @override
   Message copyWith({
+    User? author,
+    int? createdAt,
+    bool? isLoading,
     Map<String, dynamic>? metadata,
     PreviewData? previewData,
     String? remoteId,
+
     StatusType? status,
+
+    bool? showStatus,
+    
     String? text,
     int? updatedAt,
     String? uri,
@@ -75,8 +87,8 @@ class UnsupportedMessage extends Message {
     int? deletedAt,
   }) {
     return UnsupportedMessage(
-      author: author,
-      createdAt: createdAt,
+      author: author ?? this.author,
+      createdAt: createdAt ?? this.createdAt,
       id: id,
       metadata: metadata == null
           ? null
@@ -87,6 +99,7 @@ class UnsupportedMessage extends Message {
       remoteId: remoteId,
       repliedMessage: repliedMessage,
       roomId: roomId,
+      showStatus: showStatus,
       status: status ?? this.status,
       updatedAt: updatedAt,
       deleteType: deleteType,

@@ -24,6 +24,7 @@ class CustomMessage extends Message {
     Message? repliedMessage,
     String? roomId,
     StatusType? status,
+    bool? showStatus,
     MessageType? type,
     int? updatedAt,
     MessageDeleteType? deleteType,
@@ -36,6 +37,7 @@ class CustomMessage extends Message {
           remoteId,
           repliedMessage,
           roomId,
+          showStatus,
           status,
           type ?? MessageType.custom,
           updatedAt,
@@ -53,6 +55,9 @@ class CustomMessage extends Message {
     Message? repliedMessage,
     String? roomId,
     StatusType? status,
+
+    bool? showStatus,
+    
     int? updatedAt,
     MessageDeleteType? deleteType,
     int? deletedAt,
@@ -64,6 +69,7 @@ class CustomMessage extends Message {
           remoteId,
           repliedMessage,
           roomId,
+          showStatus,
           status,
           MessageType.custom,
           updatedAt,
@@ -84,17 +90,24 @@ class CustomMessage extends Message {
   /// [metadata] with null value will nullify existing metadata, otherwise
   /// both metadatas will be merged into one Map, where keys from a passed
   /// metadata will overwite keys from the previous one.
-  /// [previewData] is ignored for this message type.
-  /// [remoteId] and [updatedAt] with null values will nullify existing value.
-  /// [status] with null value will be overwritten by the previous status.
+  /// [isLoading], [previewData] is ignored for this message type.
+  /// [remoteId], [showStatus] and [updatedAt] with null values will nullify existing value.
+  /// [author], [createdAt] and [status] with null values will be overwritten by the previous values.
   /// [text] is ignored for this message type.
   /// [uri] is ignored for this message type.
   @override
   Message copyWith({
+    User? author,
+    int? createdAt,
+    bool? isLoading,
     Map<String, dynamic>? metadata,
     PreviewData? previewData,
     String? remoteId,
+
     StatusType? status,
+
+    bool? showStatus,
+    
     String? text,
     int? updatedAt,
     String? uri,
@@ -102,8 +115,8 @@ class CustomMessage extends Message {
     int? deletedAt,
   }) {
     return CustomMessage(
-      author: author,
-      createdAt: createdAt,
+      author: author ?? this.author,
+      createdAt: createdAt ?? this.createdAt,
       id: id,
       metadata: metadata == null
           ? null
@@ -115,6 +128,7 @@ class CustomMessage extends Message {
       repliedMessage: repliedMessage,
       roomId: roomId,
       status: status ?? this.status,
+      showStatus: showStatus,
       updatedAt: updatedAt,
       deleteType: deleteType,
       deletedAt: deletedAt,

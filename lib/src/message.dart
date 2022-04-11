@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_chat_types/src/status.dart';
 import 'package:meta/meta.dart';
+
 import 'messages/custom_message.dart';
 import 'messages/file_message.dart';
 import 'messages/image_message.dart';
@@ -27,6 +28,7 @@ abstract class Message extends Equatable {
     this.remoteId,
     this.repliedMessage,
     this.roomId,
+    this.showStatus,
     this.status,
     this.type,
     this.updatedAt,
@@ -54,21 +56,26 @@ abstract class Message extends Equatable {
   }
 
   /// Creates a copy of the message with an updated data
+  /// [isLoading] will be only set for the file message type.
   /// [metadata] with null value will nullify existing metadata, otherwise
   /// both metadatas will be merged into one Map, where keys from a passed
-  /// metadata will overwite keys from the previous one.
+  /// metadata will overwrite keys from the previous one.
   /// [previewData] will be only set for the text message type.
-  /// [status] with null value will be overwritten by the previous status.
+  /// [remoteId], [showStatus] and [updatedAt] with null values will nullify existing value.
+  /// [author], [createdAt] and [status] with null values will be overwritten by the previous values.
   /// [text] will be only set for the text message type. Null value will be
   /// overwritten by the previous text (can't be empty).
-  /// [remoteId] and [updatedAt] with null values will nullify existing value.
   /// [uri] will be only set for file and image message types. Null value
   /// will be overwritten by the previous value (uri can't be empty).
   Message copyWith({
+    User? author,
+    int? createdAt,
+    bool? isLoading,
     Map<String, dynamic>? metadata,
     PreviewData? previewData,
     String? remoteId,
     StatusType? status,
+    bool? showStatus,
     String? text,
     int? updatedAt,
     String? uri,
@@ -101,6 +108,9 @@ abstract class Message extends Equatable {
 
   /// Message [StatusType]
   final StatusType? status;
+
+  /// Show status or not
+  final bool? showStatus;
 
   /// [MessageType]
   final MessageType type;

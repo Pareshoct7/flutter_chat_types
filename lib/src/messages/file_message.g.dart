@@ -10,6 +10,7 @@ FileMessage _$FileMessageFromJson(Map<String, dynamic> json) => FileMessage(
       author: User.fromJson(json['author'] as Map<String, dynamic>),
       createdAt: json['createdAt'] as int?,
       id: json['id'] as String,
+      isLoading: json['isLoading'] as bool?,
       metadata: json['metadata'] as Map<String, dynamic>?,
       mimeType: json['mimeType'] as String?,
       name: json['name'] as String,
@@ -18,6 +19,7 @@ FileMessage _$FileMessageFromJson(Map<String, dynamic> json) => FileMessage(
           ? null
           : Message.fromJson(json['repliedMessage'] as Map<String, dynamic>),
       roomId: json['roomId'] as String?,
+      showStatus: json['showStatus'] as bool?,
       size: json['size'] as num,
       status: $enumDecodeNullable(_$StatusTypeEnumMap, json['status']),
       type: $enumDecodeNullable(_$MessageTypeEnumMap, json['type']),
@@ -46,10 +48,12 @@ Map<String, dynamic> _$FileMessageToJson(FileMessage instance) {
   writeNotNull('repliedMessage', instance.repliedMessage?.toJson());
   writeNotNull('roomId', instance.roomId);
   writeNotNull('status', _$StatusTypeEnumMap[instance.status]);
+  writeNotNull('showStatus', instance.showStatus);
   val['type'] = _$MessageTypeEnumMap[instance.type];
   writeNotNull('updatedAt', instance.updatedAt);
   writeNotNull('deleteType', _$MessageDeleteTypeEnumMap[instance.deleteType]);
   writeNotNull('deletedAt', instance.deletedAt);
+  writeNotNull('isLoading', instance.isLoading);
   writeNotNull('mimeType', instance.mimeType);
   val['name'] = instance.name;
   val['size'] = instance.size;

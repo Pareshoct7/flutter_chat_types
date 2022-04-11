@@ -24,6 +24,7 @@ class ImageMessage extends Message {
     String? remoteId,
     Message? repliedMessage,
     String? roomId,
+    bool? showStatus,
     required this.size,
     StatusType? status,
     MessageType? type,
@@ -40,6 +41,7 @@ class ImageMessage extends Message {
           remoteId,
           repliedMessage,
           roomId,
+          showStatus,
           status,
           type ?? MessageType.image,
           updatedAt,
@@ -56,7 +58,11 @@ class ImageMessage extends Message {
     String? remoteId,
     Message? repliedMessage,
     String? roomId,
+
     StatusType? status,
+
+    bool? showStatus,
+    
     int? updatedAt,
     MessageDeleteType? deleteType,
     int? deletedAt,
@@ -73,6 +79,7 @@ class ImageMessage extends Message {
           remoteId,
           repliedMessage,
           roomId,
+          showStatus,
           status,
           MessageType.image,
           updatedAt,
@@ -92,16 +99,23 @@ class ImageMessage extends Message {
   /// [metadata] with null value will nullify existing metadata, otherwise
   /// both metadatas will be merged into one Map, where keys from a passed
   /// metadata will overwite keys from the previous one.
-  /// [previewData] is ignored for this message type.
-  /// [remoteId] and [updatedAt] with null values will nullify existing value.
-  /// [status] and [uri] with null values will be overwritten by previous values.
+  /// [isLoading], [previewData] is ignored for this message type.
+  /// [remoteId], [showStatus] and [updatedAt] with null values will nullify existing value.
+  /// [author], [createdAt], [status] and [uri] with null values will be overwritten by previous values.
   /// [text] is ignored for this message type.
   @override
   Message copyWith({
+    User? author,
+    int? createdAt,
+    bool? isLoading,
     Map<String, dynamic>? metadata,
     PreviewData? previewData,
     String? remoteId,
+
     StatusType? status,
+
+    bool? showStatus,
+    
     String? text,
     int? updatedAt,
     String? uri,
@@ -109,8 +123,8 @@ class ImageMessage extends Message {
     int? deletedAt,
   }) {
     return ImageMessage(
-      author: author,
-      createdAt: createdAt,
+      author: author ?? this.author,
+      createdAt: createdAt ?? this.createdAt,
       height: height,
       id: id,
       metadata: metadata == null
@@ -123,6 +137,7 @@ class ImageMessage extends Message {
       remoteId: remoteId,
       repliedMessage: repliedMessage,
       roomId: roomId,
+      showStatus: showStatus,
       size: size,
       status: status ?? this.status,
       updatedAt: updatedAt,
