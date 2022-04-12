@@ -58,6 +58,7 @@ class Room extends Equatable {
     List<User>? users,
     List<Block>? blocks,
     Map<String, dynamic>? unRead,
+    Message? lastMessage,
   }) {
     return Room(
       id: id,
