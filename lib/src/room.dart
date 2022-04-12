@@ -21,7 +21,7 @@ class Room extends Equatable {
   const Room(
       {this.createdAt,
       required this.id,
-      this.imageUrl,
+      this.avatar,
       this.lastMessage,
       this.metadata,
       this.name,
@@ -44,13 +44,13 @@ class Room extends Equatable {
   Map<String, dynamic> toJson() => _$RoomToJson(this);
 
   /// Creates a copy of the room with an updated data.
-  /// [imageUrl], [name] and [updatedAt] with null values will nullify existing values
+  /// [avatar], [name] and [updatedAt] with null values will nullify existing values
   /// [metadata] with null value will nullify existing metadata, otherwise
   /// both metadatas will be merged into one Map, where keys from a passed
   /// metadata will overwite keys from the previous one.
   /// [type] and [users] with null values will be overwritten by previous values.
   Room copyWith({
-    String? imageUrl,
+    String? avatar,
     Map<String, dynamic>? metadata,
     String? name,
     RoomType? type,
@@ -62,7 +62,7 @@ class Room extends Equatable {
     return Room(
       id: id,
       requestedBy: requestedBy,
-      imageUrl: imageUrl,
+      avatar: avatar,
       lastMessage: lastMessage,
       metadata: metadata == null
           ? null
@@ -89,7 +89,7 @@ class Room extends Equatable {
   List<Object?> get props => [
         createdAt,
         id,
-        imageUrl,
+        avatar,
         lastMessage,
         metadata,
         name,
@@ -114,7 +114,7 @@ class Room extends Equatable {
 
   /// Room's image. In case of the [RoomType.direct] - avatar of the second person,
   /// otherwise a custom image [RoomType.group].
-  final String? imageUrl;
+  final String? avatar;
 
   /// List of last messages this room has received
   final Message? lastMessage;

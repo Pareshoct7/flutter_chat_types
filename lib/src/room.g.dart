@@ -9,7 +9,7 @@ part of 'room.dart';
 Room _$RoomFromJson(Map<String, dynamic> json) => Room(
       createdAt: json['createdAt'] as int?,
       id: json['id'] as String,
-      imageUrl: json['imageUrl'] as String?,
+      avatar: json['avatar'] as String?,
       lastMessage: json['lastMessage'] == null
           ? null
           : Message.fromJson(json['lastMessage'] as Map<String, dynamic>),
@@ -43,7 +43,7 @@ Map<String, dynamic> _$RoomToJson(Room instance) {
 
   writeNotNull('createdAt', instance.createdAt);
   val['id'] = instance.id;
-  writeNotNull('imageUrl', instance.imageUrl);
+  writeNotNull('avatar', instance.avatar);
   writeNotNull('lastMessage', instance.lastMessage?.toJson());
   writeNotNull('metadata', instance.metadata);
   writeNotNull('name', instance.name);
